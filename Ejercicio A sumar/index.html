@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumatorio</title>
+</head>
+
+<body>
+
+    <form action="asumar.php" method="POST">
+        <label for="num1">Numero 1</label>
+        <input type="number" name="num1" id="num1">
+        <label for="num2">Numero 2</label>
+        <input type="number" name="num2" id="num2">
+        <input type="submit" value="Sumar" onclick="ajax()">
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+
+        num1 = document.getElementById("num1");
+        num2 = document.getElementById("num2");
+        resultado = document.getElementById("resultado");
+
+        function ajax() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onclick = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    resultado.innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("POST", "asumar.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("num1=" + num1.value + "&num2=" + num2.value);
+        }
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
