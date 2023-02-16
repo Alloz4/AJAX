@@ -40,13 +40,6 @@
     </form>
     <script>
 
-        // A partir del archivo “ccaa.json” proporcionado y el archivo “provincias.html”, desarrolla el código en cabecera y en javascript vanilla que permita:
-        // Controlar la carga del documento html por medio del oyente de evento “DOMContentLoaded”.
-        // Definir las variables que referencien cada uno de los objetos del archivo html.
-        // Definir el oyente de evento necesario para que al cambiar la elección en la ccaa se inicie 
-        //el proceso necesario para solicitar al servidor “ccaa.json” las provincias que componen la ccaa solicitada y 
-        //recoger la respuesta del servidor en el formato adecuado y presentarla en el componente creado dinámicamente, el select identificado como provincias.
-
         let provincias = document.querySelector('select');
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -59,7 +52,9 @@
                 let peticion = new XMLHttpRequest();
                 peticion.open('GET', url);
                 peticion.send();
+
                 peticion.addEventListener('readystatechange', function () {
+
                     if (peticion.readyState == 4 && peticion.status == 200) {
                         let datos = JSON.parse(peticion.responseText);
                         let provincias = datos[comunidad];
@@ -73,24 +68,13 @@
                         }
                         document.querySelector('form').appendChild(select);
                     }
+
                 });
 
                 let select = document.querySelector('#provincias');
                 select.parentNode.removeChild(select);
             });
         });
-
-
-
-
-
-
-
-
-
-
-
-
 
     </script>
 </body>
