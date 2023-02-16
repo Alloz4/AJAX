@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login disponible o no</title>
+	<script>
+		let nombre = document.getElementById("caja");
+		let respuesta = document.getElementsByName("Respuesta")[0];
+
+		document.addEventListener("DOMContentLoaded", function () {
+			let enlace = document.getElementById("enlace");
+			enlace.addEventListener("click", enviarAjax);
+		});
+
+		function enviarAjax() {
+			let xhr = new XMLHttpRequest();
+			xhr.addEventListener("readystatechange", gestionarRespuesta);
+			let url = "ajax.php";
+			xhr.open("GET", url, true);
+			xhr.send(null);
+		}
+
+		function gestionarRespuesta(e) {
+			if (e.target.readyState == 4 && e.target.status == 200) {
+				let respuesta = e.target.responseText;
+				document.getElementsByName("Respuesta")[0].value = respuesta;
+			}
+		}
+
+
+
+
+
+
+
+
+	</script>
+</head>
+
+<body>
+	<form>
+		<table>
+			<tr>
+				<td>Nombre de usuario:</td>
+				<td><input type="text" name="Nombre" id="caja"></td>
+				<td><a href="#" id="enlace">Comprobar disponibilidad</a></td>
+			</tr>
+		</table><br><br>
+		<label for="">Disponibilidad:</label><input type="text" name="Respuesta" value=""><br>
+
+
+
+	</form>
+</body>
+
+</html>

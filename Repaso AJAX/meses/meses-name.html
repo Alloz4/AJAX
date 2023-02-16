@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<HTML>
+
+<head>
+    <meta charset="utf-8">
+    <title>Obteniendo meses</title>
+    <script>
+
+        document.addEventListener("readystatechange", function () {
+
+            let valor = document.getElementsByName('valor')[0];
+            let consultar = document.getElementById('boton');
+            let resultado = document.getElementById('resultado');
+
+            consultar.addEventListener('click', function () {
+
+                if (valor.value == "") {
+                    resultado.innerHTML = "No puede estar vacio";
+                    setTimeout(function () { location.reload(); }, 1000);
+                    return resultado;
+                }
+                if (isNaN(valor.value)) {
+                    resultado.innerHTML = "El valor de la caja tiene que ser numero";
+                    setTimeout(function () { location.reload(); }, 1000);
+                    return resultado;
+                }
+                let xhr = new XMLHttpRequest();
+                xhr.open('GET', `meses.php?num=${valor.value}`);
+                xhr.send(null);
+                xhr.addEventListener('readystatechange', function () {
+
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        resultado.innerHTML = xhr.responseText;
+                    }
+
+                });
+            });
+
+
+        });
+
+
+    </script>
+</head>
+
+<body>
+    <input type="text" name="valor" value="">
+    <input type="button" id="boton" value="consultar">
+    <br><br>
+    <div id="resultado"></div>
+</body>
+
+</html>

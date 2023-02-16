@@ -17,7 +17,6 @@
                 xhr.open("GET", "datos.php?q=" + input.value, true);
 
                 xhr.addEventListener("readystatechange", function () {
-                    7
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         resultado.innerHTML = xhr.responseText;
                     }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>SUPERHEROES QUE IMPARTEN JUSTICIA</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <header>
+        <h2>ESPERANDO CONEXIÓN A BBDD . . . . . .</h2>
+    </header>
+    <section>
+    </section>
+    <script>
+        const cabecera = document.querySelector('header');
+        const seccion = document.querySelector('section');
+        let requestObject;
+        document.addEventListener("DOMContentLoaded", () => setTimeout(enviopeticionAJAX, 3000));
+
+        function enviopeticionAJAX() {
+            while (cabecera.firstElementChild) cabecera.removeChild(cabecera.firstElementChild);
+            requestObject = new XMLHttpRequest();
+            requestObject.addEventListener("readystatechange", gestionarrespuesta, false);
+            requestObject.open("GET", "aws.json", true);
+            requestObject.send(null);
+        }
+
+        function gestionarrespuesta(e) {
+            if (e.target.readyState === 4 && e.target.status === 200) {
+                const politicasObject = JSON.parse(requestObject.responseText);
+                completarCabecera(politicasObject.Version);
+                completarSeccion(politicasObject.Statement);
+            }
+        }
+
+        function completarCabecera(version) {
+            const eleH1 = document.createElement('h1');
+            eleH1.textContent = version;
+            cabecera.appendChild(eleH1);
+            cabecera.insertAdjacentHTML('beforeend', '<p>Statement</p>');
+        }
+
+        function completarSeccion(statement) {
+            for (let i = 0; i < statement.length; i++) {
+                const eleArticle = document.createElement('article');
+                eleArticle.innerHTML = `
+            <h2>Opción ${i}</h2>
+            <p>Efecto: ${statement[i].Effect}</p>
+            <p>Recursos: ${statement[i].Resource}</p>
+            <p>Acciones:</p>
+            <ul>${statement[i].Action.map((accion) => `<li>${accion}</li>`).join('')}</ul>
+          `;
+                seccion.appendChild(eleArticle);
+            }
+        }
+    </script>
+</body>
+
+</html>
