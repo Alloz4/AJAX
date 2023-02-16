@@ -6,6 +6,29 @@
     <title>EjERCICIO AJAX PHP</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            let input = document.querySelector("input");
+            let resultado = document.querySelector("#resultado");
+
+            input.addEventListener("keyup", function () {
+                let xhr = new XMLHttpRequest();
+                xhr.open("GET", "datos.php?q=" + input.value, true);
+
+                xhr.addEventListener("readystatechange", function () {
+                    7
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        resultado.innerHTML = xhr.responseText;
+                    }
+                });
+                xhr.send();
+            });
+
+
+        });
+    </script>
+
 </head>
 
 <body>
@@ -30,15 +53,6 @@
             EJERCICIO DE AUTOCOMPLETADO CON AJAX
         </footer>
     </div>
-
-    <script>
-//         A partir del archivo “datos.php” proporcionado y el archivo “index-autocompletado.html”, desarrolla el código en cabecera y en javascript vanilla que permita:
-// Controlar la carga del documento html por medio del oyente de evento “DOMContentLoaded”.
-// Definir las variables que referencien cada uno de los objetos del archivo html.
-// Definir el oyente de evento necesario para que cada vez que se teclea un carácter en la caja de texto de entrada de datos se inicie el proceso necesario para solicitar al servidor “datos.php” la coincidencia o no con los datos disponibles en el servidor.
-// La respuesta del servidor se reflejará en el elemento identificado como resultado.
-
-    </script>
 </body>
 
 </html>
