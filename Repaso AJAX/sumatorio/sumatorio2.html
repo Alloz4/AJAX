@@ -1,0 +1,77 @@
+<html>
+
+<head>
+    <title>Ejemplo sencillo de AJAX</title>
+
+    <script>
+        var v1;
+        var v2;
+        var suma;
+        var resultado;
+
+        document.addEventListener("DOMContentLoaded", iniciar, false);
+
+        function iniciar() {
+            v1 = document.getElementById('valor1');
+            v2 = document.getElementById('valor2');
+            suma = document.getElementById('calcula');
+            resultado = document.getElementById('resultado');
+
+            suma.addEventListener('click', enviarAjax);
+        }
+
+        function enviarAjax() {
+            if (v1.value == '' && v2.value == '') {
+                //Crear un elemento de tipo p y añadirlo al body
+                let p = document.createElement('p');
+                p.innerHTML = 'Los valores no pueden ser 0';
+                p.style.color = 'red';
+                document.body.appendChild(p);
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
+                return resultado;
+            }
+            let xhr = new XMLHttpRequest();
+            xhr.addEventListener('readystatechange', gestionarResultado);
+            xhr.open('POST', 'asumar.php');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send('valor1=' + v1.value + '&valor2=' + v2.value);
+        }
+
+        function gestionarResultado(e) {
+            if (e.target.readyState == 4 && e.target.status == 200) {
+                resultado.innerHTML = e.target.responseText;
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+
+    Introduce valor 1
+
+    <input type="text" id="valor1" value="0">
+
+
+    Introduce valor 2
+
+    <input type="text" id="valor2" value="0">
+
+    <br />
+
+    <br />
+
+    Realiza suma
+
+    <input type="button" id="calcula" value="Calcula">
+    <br />
+
+    <br />
+
+    Resultado: <span id="resultado">0</span>
+
+</body>
+
+</html>

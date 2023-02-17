@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<HTML>
+
+<head>
+    <meta charset="utf-8">
+    <title>Obteniendo meses</title>
+    <script>
+
+        let valor;
+        let consultar;
+        let resultado;
+
+        document.addEventListener("readystatechange", iniciar);
+
+        function iniciar() {
+            valor = document.getElementsByName('valor')[0];
+            consultar = document.getElementById('boton');
+            resultado = document.getElementById('resultado');
+            consultar.addEventListener('click', enviarAjax);
+        }
+
+        function enviarAjax() {
+            if (valor.value === '') {
+                resultado.innerHTML = 'No se puede dejar vacio';
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+                return resultado;
+
+            }
+            let xhr = new XMLHttpRequest();
+            xhr.addEventListener('readystatechange', respuesta);
+            xhr.open('GET', 'meses.php?num=' + valor.value);
+            xhr.send(null);
+        }
+
+        function respuesta(e) {
+            if (e.target.readyState == 4 && e.target.status == 200) {
+                resultado.innerHTML = e.target.responseText;
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <input type="text" name="valor" value="">
+    <input type="button" id="boton" value="consultar">
+    <br><br>
+    <div id="resultado"></div>
+</body>
+
+</html>
