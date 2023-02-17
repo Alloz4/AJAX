@@ -22,14 +22,39 @@
     <div class="respuesta"></div>
 
     <script>
-        //         A partir del archivo “datos.php” proporcionado y el archivo “index - 0.html”, desarrolla el código en cabecera y en javascript vanilla que permita:
-        // Controlar la carga del documento html por medio del oyente de evento “DOMContentLoaded”.
-        // Definir las variables que referencien cada uno de los objetos del archivo html.
-        // Definir el oyente de evento necesario para que al hacer click sobre el div “enviar” se inicie el proceso necesario para transmitir los datos del usuario al servidor php y recoger la respuesta del servidor en el formato adecuado y presentarla en el componente identificado como “respuesta”.
 
+        //CON FUNCIONES SIN ENCADENAR
+
+        // var nombre = document.getElementById("nombre");
+        // var apellido = document.getElementById("apellido");
+        // var edad = document.getElementById("edad");
+
+        // document.addEventListener("DOMContentLoaded", iniciar);
+
+        // function iniciar() {
+        //     var enviar = document.querySelector(".enviar");
+        //     enviar.addEventListener("click", enviarDatos);
+        // }
+
+        // function enviarDatos() {
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open("POST", "datos.php", true);
+        //     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        //     xhr.onreadystatechange = function () {
+        //         if (xhr.readyState == 4 && xhr.status == 200) {
+        //             var respuesta = document.querySelector(".respuesta");
+        //             respuesta.innerHTML = xhr.responseText;
+        //         }
+        //     }
+        //     xhr.send("nombre=" + nombre.value + "&apellido=" + apellido.value + "&edad=" + edad.value);
+        // }
+
+
+        //CON FUNCIONES ENCADENADAS
 
         document.addEventListener("DOMContentLoaded", function () {
-            let nombre = document.getElementById("nombre");
+            let nombre = document.querySelector('nth-child(1)');
+            console.log(nombre);
             let apellido = document.getElementById("apellido");
             let edad = document.getElementById("edad");
             let enviar = document.querySelector(".enviar");
