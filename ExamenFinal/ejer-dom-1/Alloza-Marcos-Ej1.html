@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elección Gimnasio</title>
+</head>
+
+<body>
+
+    <script>
+
+        //Crear tabla
+        let tabla = document.createElement("table");
+        tabla.setAttribute("border", "1");
+        tabla.setAttribute("width", "50%");
+        tabla.setAttribute("height", "50%");
+        tabla.setAttribute("id", "tabla");
+
+        //Crear filas
+        let fila1 = document.createElement("tr");
+        let fila2 = document.createElement("tr");
+        let fila3 = document.createElement("tr");
+
+        //Creo las columnas 
+        let columna1 = document.createElement("td");
+        let columna2 = document.createElement("td");
+        let columna3 = document.createElement("td");
+        let columna4 = document.createElement("td");
+        let columna5 = document.createElement("td");
+        let columna6 = document.createElement("td");
+
+        //Creo los elementos 
+        let texto = document.createTextNode("Abierto 24h");
+        let texto1 = document.createTextNode("Clases Colectivas");
+        let texto2 = document.createTextNode("Artes Marciales");
+        let texto3 = document.createTextNode("Solo mujeres");
+        let texto4 = document.createTextNode("Crossfit");
+        let texto5 = document.createTextNode("Pilates");
+
+
+
+        //Creo los checkbox y defino sus propiedades:
+        let checkbox1 = document.createElement("input");
+        checkbox1.setAttribute("type", "checkbox");
+        checkbox1.setAttribute("defaultChecked", "true");
+        checkbox1.setAttribute("name", "abierto");
+        checkbox1.setAttribute("value", "abierto");
+
+        let checkbox2 = document.createElement("input");
+        checkbox2.setAttribute("type", "checkbox");
+        checkbox2.setAttribute("defaultChecked", "true");
+        checkbox2.setAttribute("name", "clases");
+        checkbox2.setAttribute("value", "clases");
+
+        let checkbox3 = document.createElement("input");
+        checkbox3.setAttribute("type", "checkbox");
+        checkbox3.setAttribute("defaultChecked", "false");
+        checkbox3.setAttribute("name", "artes");
+        checkbox3.setAttribute("value", "artes");
+
+        let checkbox4 = document.createElement("input");
+        checkbox4.setAttribute("type", "checkbox");
+        checkbox4.setAttribute("defaultChecked", "false");
+        checkbox4.setAttribute("name", "mujeres");
+        checkbox4.setAttribute("value", "mujeres");
+
+        let checkbox5 = document.createElement("input");
+        checkbox5.setAttribute("type", "checkbox");
+        checkbox5.setAttribute("defaultChecked", "false");
+        checkbox5.setAttribute("name", "crossfit");
+        checkbox5.setAttribute("value", "crossfit");
+
+        let checkbox6 = document.createElement("input");
+        checkbox6.setAttribute("type", "checkbox");
+        checkbox6.setAttribute("defaultChecked", "false");
+        checkbox6.setAttribute("name", "pilates");
+        checkbox6.setAttribute("value", "pilates");
+
+        //Añado los elementos al DOM
+        document.body.appendChild(tabla);
+        document.getElementById("tabla").appendChild(fila1);
+        document.getElementById("tabla").appendChild(fila2);
+        document.getElementById("tabla").appendChild(fila3);
+        document.getElementById("tabla").firstChild.appendChild(columna1);
+        document.getElementById("tabla").firstChild.appendChild(columna2);
+        document.getElementById("tabla").firstChild.nextSibling.appendChild(columna3);
+        document.getElementById("tabla").firstChild.nextSibling.appendChild(columna4);
+        document.getElementById("tabla").lastChild.appendChild(columna5);
+        document.getElementById("tabla").lastChild.appendChild(columna6);
+
+        //Añado texto y checkbox al DOM
+        document.getElementById("tabla").firstChild.firstChild.appendChild(checkbox1);
+        document.getElementById("tabla").firstChild.firstChild.appendChild(texto);
+        document.getElementById("tabla").firstChild.firstChild.nextSibling.appendChild(checkbox4);
+        document.getElementById("tabla").firstChild.firstChild.nextSibling.appendChild(texto3);
+        document.getElementById("tabla").firstChild.nextSibling.firstChild.appendChild(checkbox2);
+        document.getElementById("tabla").firstChild.nextSibling.firstChild.appendChild(texto1);
+        document.getElementById("tabla").firstChild.nextSibling.firstChild.nextSibling.appendChild(checkbox5);
+        document.getElementById("tabla").firstChild.nextSibling.firstChild.nextSibling.appendChild(texto4);
+        document.getElementById("tabla").lastChild.firstChild.appendChild(checkbox3);
+        document.getElementById("tabla").lastChild.firstChild.appendChild(texto2);
+        document.getElementById("tabla").lastChild.firstChild.nextSibling.appendChild(checkbox6);
+        document.getElementById("tabla").lastChild.firstChild.nextSibling.appendChild(texto5);
+
+    </script>
+</body>
+
+</html>

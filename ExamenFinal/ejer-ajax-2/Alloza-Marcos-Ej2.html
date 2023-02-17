@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+   <meta charset="utf-8" />
+   <title>Estudiando al cliente</title>
+
+   <script>
+
+      document.addEventListener("DOMContentLoaded", function () {
+
+         var nombre = document.rrss.elements[0];
+         var correo = document.rrss.elements[1];
+
+         // Foco en el input nombre
+         nombre.focus();
+
+         // Evento para el cambio de foco del input nombre al correo
+         nombre.addEventListener("keyup", function (e) {
+            if (e.keyCode == 13) {
+               correo.focus();
+            }
+         });
+
+         var cmbMedio = document.getElementById("cmbMedio");
+         var check = document.rrss.elements[3];
+         var boton = document.rrss.elements[4];
+
+         //Declaramos la variable opc para los option y le asignamos el valor por defecto
+         var opc = cmbMedio.value;
+
+         // Evento para el combio de opción en el select
+         cmbMedio.addEventListener("change", function () {
+            opc = cmbMedio.value;
+         });
+
+         // Evento para el click en el botón
+         boton.addEventListener("click", function () {
+
+            nombre = document.rrss.elements[0].value;
+            correo = document.rrss.elements[1].value;
+            check = document.rrss.elements[3].checked;
+
+            //Comprobamos si el checkbox está marcado
+            if (check) {
+               check = "Quiero que se me envie información por " + opc;
+            }
+
+            //Definimos la variable datos para enviarla por POST
+            let datos = "nom=" + nombre + "&cor=" + correo + "&opc=" + opc + "&pet=" + check;
+
+            //Creamos el objeto XMLHttpRequest
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "datos.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send(datos);
+
+            //Evento para la respuesta del servidor
+            xhr.addEventListener("readystatechange", function () {
+               if (xhr.readyState == 4 && xhr.status == 200) {
+                  //Mostramos la respuesta del servidor
+                  document.getElementsByName("devolucion")[0].innerHTML = xhr.responseText;
+               }
+            });
+         });
+
+      });
+
+   </script>
+</head>
+
+<body>
+   <center>
+
+      <body>
+         <h1>Enviando datos de forma asíncrona con AJAX</h1>
+         <p>Por favor, introduce los siguientes datos</p>
+         <form name="rrss">
+            <p><label>¿Cuál es tu nombre?</label> <input type="text" required /></p>
+            <p><label>¿Nos das tu correo?</label> <input type="email" required /></p>
+            <p><label>¿Cómo nos has conocido?</label> <select id="cmbMedio">
+                  <option value="FaceBook">Facebook</option>
+                  <option value="Twitter">Twitter</option>
+                  <option value="Whatsapp">Whatsapp</option>
+                  <option value="Correo">Mail</option>
+               </select></p>
+            <p><input type="checkbox" /> <label>¿Quieres recibir nuestra información por el medio que nos has
+                  conocido?</label></p>
+            <p><input type="button" value=" Aceptar " /></p><br>
+            <p><b>Resultado de la conexión al servidor:</b></p><br>
+            <div name="devolucion"></div>
+         </form>
+   </center>
+</body>
+
+</html>
